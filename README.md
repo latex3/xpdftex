@@ -10,7 +10,7 @@ Some differences in formatting may still exist (different underlying
 hyphenation mechanism, and some more obscure pdftex extensions are
 harder to emulate).
 
-Test documents and other documents explicitly testing definitiosn
+Test documents and other documents explicitly testing definitions
 with `\meaning` of `\ifprimitive` can detect the emulation, but most
 "normal" documents should (eventually) work without error.
 
