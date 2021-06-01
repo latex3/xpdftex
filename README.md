@@ -7,7 +7,7 @@ legacy pdflatex documents to be processed while still accessing
 internals via Lua for PDF Tagging, MathML or other reasons.
 
 Some differences in formatting may still exist (different underlying
-hyophenation mechanism, and some more obscure pdftex extensions are
+hyphenation mechanism, and some more obscure pdftex extensions are
 harder to emulate).
 
 Test documents and other documents explicitly testing definitiosn
