@@ -1,0 +1,128 @@
+
+\catcode`\{=1
+\catcode`\}=2
+\catcode`\@=11
+\catcode`\!=11
+\catcode`\_=11
+\catcode`\:=11
+
+\let\@@!directlua\directlua \let\directlua\undefined
+
+\@@!directlua{tex.enableprimitives('pdf',{'tracingfonts','pagewidth','pageheight',
+'adjustspacing','protrudechars','copyfont','savepos','lastxpos','lastypos',
+'draftmode','pxdimen','insertht','normaldeviate','setrandomseed','primitive'
+})}
+\@@!directlua{tex.enableprimitives('',{'expanded','ignoreligaturesinfont',
+'expandglyphsinfont','lastsavedboxresourceindex','useboxresource','saveimageresource',
+'lastsavedimageresourceindex','lastsavedimageresourcepages','useimageresource','outputmode',
+'ifprimitive','ifabsnum','ifabsdim'})}
+\@@!directlua{tex.enableprimitives('',tex.extraprimitives('etex'))}
+\@@!directlua{tex.enableprimitives('@@!',{'pdffeedback','pdfextension','pdfvariable'})}
+
+
+
+\let\pdfnoligatures     \ignoreligaturesinfont       \let\ignoreligaturesinfont\undefined
+\let\pdffontexpand      \expandglyphsinfont          \let\expandglyphsinfont\undefined
+\let\pdfxform           \saveboxresource             \let\saveboxresource\undefined
+\let\pdflastxform       \lastsavedboxresourceindex   \let\lastsavedboxresourceindex\undefined
+\let\pdfrefxform        \useboxresource              \let\useboxresource\undefined
+\let\pdfximage          \saveimageresource           \let\saveimageresource\undefined
+\let\pdflastximage      \lastsavedimageresourceindex \let\lastsavedimageresourceindex\undefined
+\let\pdflastximagepages \lastsavedimageresourcepages \let\lastsavedimageresourcepages\undefined
+\let\pdfrefximage       \useimageresource            \let\useimageresource\undefined
+
+\let\pdfoutput          \outputmode                  \let\outputmode\undefined
+
+\let\ifpdfprimitive     \ifprimitive                 \let\ifprimitive\undefined
+\let\ifpdfabsnum        \ifabsnum                    \let\ifabsnum\undefined
+\let\ifpdfabsdim        \ifabsdim                    \let\ifabsdim\undefined
+\protected\def\pdftexversion     {\numexpr 140\relax}
+          \def\pdftexrevision    {7}
+\protected\def\pdflastlink       {\numexpr\@@!pdffeedback lastlink\relax}
+\protected\def\pdfretval         {\numexpr\@@!pdffeedback retval\relax}
+\protected\def\pdflastobj        {\numexpr\@@!pdffeedback lastobj\relax}
+\protected\def\pdflastannot      {\numexpr\@@!pdffeedback lastannot\relax}
+          \def\pdfxformname      {\@@!pdffeedback xformname}
+{\pdfoutput=1
+         \xdef\pdfcreationdate   {\@@!pdffeedback creationdate}
+}
+          \def\pdffontname       {\@@!pdffeedback fontname}
+          \def\pdffontobjnum     {\@@!pdffeedback fontobjnum}
+          \def\pdffontsize       {\@@!pdffeedback fontsize}
+          \def\pdfpageref        {\@@!pdffeedback pageref}
+          \def\pdfcolorstackinit {\@@!pdffeedback colorstackinit}
+\protected\def\pdfliteral        {\@@!pdfextension literal}
+\protected\def\pdfcolorstack     {\@@!pdfextension colorstack}
+\protected\def\pdfsetmatrix      {\@@!pdfextension setmatrix}
+\protected\def\pdfsave           {\@@!pdfextension save\relax}
+\protected\def\pdfrestore        {\@@!pdfextension restore\relax}
+\protected\def\pdfobj            {\@@!pdfextension obj }
+\protected\def\pdfrefobj         {\@@!pdfextension refobj }
+\protected\def\pdfannot          {\@@!pdfextension annot }
+\protected\def\pdfstartlink      {\@@!pdfextension startlink }
+\protected\def\pdfendlink        {\@@!pdfextension endlink\relax}
+\protected\def\pdfoutline        {\@@!pdfextension outline }
+\protected\def\pdfdest           {\@@!pdfextension dest }
+\protected\def\pdfthread         {\@@!pdfextension thread }
+\protected\def\pdfstartthread    {\@@!pdfextension startthread }
+\protected\def\pdfendthread      {\@@!pdfextension endthread\relax}
+\protected\def\pdfinfo           {\@@!pdfextension info }
+\protected\def\pdfcatalog        {\@@!pdfextension catalog }
+\protected\def\pdfnames          {\@@!pdfextension names }
+\protected\def\pdfincludechars   {\@@!pdfextension includechars }
+\protected\def\pdffontattr       {\@@!pdfextension fontattr }
+\protected\def\pdfmapfile        {\@@!pdfextension mapfile }
+\protected\def\pdfmapline        {\@@!pdfextension mapline }
+\protected\def\pdftrailer        {\@@!pdfextension trailer }
+\protected\def\pdfglyphtounicode {\@@!pdfextension glyphtounicode }
+\protected\edef\pdfcompresslevel       {\@@!pdfvariable compresslevel}
+\protected\edef\pdfobjcompresslevel    {\@@!pdfvariable objcompresslevel}
+\protected\edef\pdfdecimaldigits       {\@@!pdfvariable decimaldigits}
+\protected\edef\pdfgamma               {\@@!pdfvariable gamma}
+\protected\edef\pdfimageresolution     {\@@!pdfvariable imageresolution}
+\protected\edef\pdfimageapplygamma     {\@@!pdfvariable imageapplygamma}
+\protected\edef\pdfimagegamma          {\@@!pdfvariable imagegamma}
+\protected\edef\pdfimagehicolor        {\@@!pdfvariable imagehicolor}
+\protected\edef\pdfimageaddfilename    {\@@!pdfvariable imageaddfilename}
+\protected\edef\pdfpkresolution        {\@@!pdfvariable pkresolution}
+\protected\edef\pdfinclusioncopyfonts  {\@@!pdfvariable inclusioncopyfonts}
+\protected\edef\pdfinclusionerrorlevel {\@@!pdfvariable inclusionerrorlevel}
+\protected\edef\pdfgentounicode        {\@@!pdfvariable gentounicode}
+\protected\edef\pdfpagebox             {\@@!pdfvariable pagebox}
+\protected\edef\pdfminorversion        {\@@!pdfvariable minorversion}
+\protected\edef\pdfuniqueresname       {\@@!pdfvariable uniqueresname}
+\protected\edef\pdfhorigin             {\@@!pdfvariable horigin}
+\protected\edef\pdfvorigin             {\@@!pdfvariable vorigin}
+\protected\edef\pdflinkmargin          {\@@!pdfvariable linkmargin}
+\protected\edef\pdfdestmargin          {\@@!pdfvariable destmargin}
+\protected\edef\pdfthreadmargin        {\@@!pdfvariable threadmargin}
+\protected\edef\pdfpagesattr           {\@@!pdfvariable pagesattr}
+\protected\edef\pdfpageattr            {\@@!pdfvariable pageattr}
+\protected\edef\pdfpageresources       {\@@!pdfvariable pageresources}
+\protected\edef\pdfxformattr           {\@@!pdfvariable xformattr}
+\protected\edef\pdfxformresources      {\@@!pdfvariable xformresources}
+\protected\edef\pdfpkmode              {\@@!pdfvariable pkmode}
+
+\let\@@!everyjob\everyjob
+\toksdef\everyjob60000 % pdftex doesn't know about these
+\countdef\e@alloc@luafunction@count60000
+\countdef\pdfshellescape60001 \pdfshellescape=0
+
+\def\@@!postlua{%
+\let\pdffilesize\tex_filesize:D\let\tex_filesize:D\undefined
+\let\pdffiledump\tex_filedump:D\let\tex_filedump:D\undefined
+\let\pdffilemoddate\tex_filemoddate:D\let\tex_filemoddate:D\undefined
+\let\pdfstrcmp\tex_strcmp:D\let\tex_strcmp:D\undefined
+\let\pdfmdfivesum\tex_mdfivesum:D\let\tex_mdfivesum:D\undefined
+\let\pdfelapsedtime\__sys_elapsedtime:\let\__sys_elapsedtime:\undefined
+}
+\@@!everyjob{\@@!directlua{require("pdftexlua.lua")}\@@!postlua\the\everyjob}
+\@@!directlua{require("pdftexlua.lua")}\@@!postlua
+\catcode`\{=12
+\catcode`\{=12
+\catcode`\@=12
+\catcode`\!=12
+\catcode`\_=12
+\catcode`\:=12
+
+\input pdflatex.ini
