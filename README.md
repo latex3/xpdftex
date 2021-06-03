@@ -11,7 +11,7 @@ hyphenation mechanism, and some more obscure pdftex extensions are
 harder to emulate).
 
 Test documents and other documents explicitly testing definitions
-with `\meaning` of `\ifprimitive` can detect the emulation, but most
+with `\meaning` or `\ifprimitive` can detect the emulation, but most
 "normal" documents should (eventually) work without error.
 
 luatex is mostly hidden so that packages such as graphics/hyperref etc
