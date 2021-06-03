@@ -56,14 +56,14 @@ local function process(head, direction)
       n.direction = direction -- There should be some special case related to math here...
       process(n.head, direction)
     elseif id == node.id'dir' then
-      print(#stack, direction, n)
       if sub == 0 then
         stack[#stack + 1], direction = direction, n.direction
       else
         if #stack == 0 or direction ~= n.direction then
-          print(direction, n.direction, #stack)
+          -- Mismatch... Maybe we should warn about it?
+        else
+          stack[#stack], direction = nil, stack[#stack]
         end
-        stack[#stack], direction = nil, stack[#stack]
       end
     end
     -- Missing case: leaders, (local_par Doesn't seem necessary) {others?)
@@ -71,20 +71,44 @@ local function process(head, direction)
 end
 
 local texxetstate_id = token.create'TeXXeTstate'.index
---[[
-luatexbase.add_to_callback('pre_shipout_filter', function(n)
-  if tex.count[texxetstate_id] > 0 then
-    process(n.head, 0)
-    n.direction = 0
+
+-- We need pre_shipout_filter, but that is only defined in LuaLaTeX. So we
+-- duplicate it's definition here. The pre_dump dance is necessary since
+-- this has to be executed after ltshipout has been loaded.
+if status.ini_version then
+  luatexbase.add_to_callback('pre_dump', function(n)
+    if token.is_defined'__shipout_finalize_box:' then
+      local func = luatexbase.new_luafunction'__shipout_finalize_box:'
+      token.set_lua('__shipout_finalize_box:', func, 'protected')
+    end
+  end, '__shipout_finalize_box.initialize')
+elseif token.is_defined'__shipout_finalize_box:' then
+  local finalize = token.create'__shipout_finalize_box:'
+  assert(finalize.cmdname == 'lua_call')
+  local shipout_box = token.create'l_shipout_box'.index
+  luatexbase.create_callback('pre_shipout_filter', 'list')
+  local call, getbox, setbox = luatexbase.call_callback, tex.getbox, tex.setbox
+  lua.get_functions_table()[finalize.index] = function()
+    local result = call('pre_shipout_filter', getbox(shipout_box))
+    if not (result == true) then
+      setbox(shipout_box, result or nil)
+    end
   end
-  return true
-end, 'TeXXeT')
-luatexbase.add_to_callback('post_mlist_to_hlist_filter', function(n)
-  if tex.count[texxetstate_id] <= 0 then return true end
-  local beginL = node.new'dir'
-  beginL.dir = '+TLT'
-  local endL = node.new'dir'
-  endL.dir = '-TLT'
-  return (node.insert_after(node.insert_before(n, n, beginL), nil, endL))
-end, 'TeXXeT')
-]]
+
+  -- TeX--XeT again
+  luatexbase.add_to_callback('pre_shipout_filter', function(n)
+    if tex.count[texxetstate_id] > 0 then
+      process(n.head, 0)
+      n.direction = 0
+    end
+    return true
+  end, 'TeXXeT')
+  luatexbase.add_to_callback('post_mlist_to_hlist_filter', function(n)
+    if tex.count[texxetstate_id] <= 0 then return true end
+    local beginL = node.new'dir'
+    beginL.dir = '+TLT'
+    local endL = node.new'dir'
+    endL.dir = '-TLT'
+    return (node.insert_after(node.insert_before(n, n, beginL), nil, endL))
+  end, 'TeXXeT')
+end
