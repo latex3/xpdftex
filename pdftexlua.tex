@@ -115,6 +115,11 @@
 \let\pdfstrcmp\tex_strcmp:D\let\tex_strcmp:D\undefined
 \let\pdfmdfivesum\tex_mdfivesum:D\let\tex_mdfivesum:D\undefined
 \let\pdfelapsedtime\__sys_elapsedtime:\let\__sys_elapsedtime:\undefined
+\let\__intarray_gset_count:Nw\@undefined
+\let\intarray_count:N\@undefined
+\let\intarray_count:N\@undefined
+\let\intarray_gzero:N\@undefined
+\let\__intarray_to_clist:Nn\@undefined
 }
 \@@!everyjob{\@@!directlua{require("pdftexlua.lua")}\@@!postlua\the\everyjob}
 \@@!directlua{require("pdftexlua.lua")}\@@!postlua
@@ -125,4 +130,3 @@
 \catcode`\_=12
 \catcode`\:=12
 
-\input pdflatex.ini
