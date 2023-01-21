@@ -10,7 +10,7 @@
 
 \@@!directlua{tex.enableprimitives('pdf',{'tracingfonts','pagewidth','pageheight',
 'adjustspacing','protrudechars','copyfont','savepos','lastxpos','lastypos',
-'draftmode','pxdimen','insertht','normaldeviate','setrandomseed','primitive'
+'draftmode','pxdimen','insertht','normaldeviate','uniformdeviate', 'setrandomseed','primitive'
 })}
 \@@!directlua{tex.enableprimitives('',{'expanded','ignoreligaturesinfont',
 'expandglyphsinfont','lastsavedboxresourceindex','useboxresource','saveimageresource',
@@ -102,11 +102,10 @@
 \protected\edef\pdfxformattr           {\@@!pdfvariable xformattr}
 \protected\edef\pdfxformresources      {\@@!pdfvariable xformresources}
 \protected\edef\pdfpkmode              {\@@!pdfvariable pkmode}
-
+\protected\edef\pdfshellescape{\numexpr\@@!directlua{tex.sprint(status.shell_escape)}\relax}
 \let\@@!everyjob\everyjob
 \toksdef\everyjob60000 % pdftex doesn't know about these
 \countdef\e@alloc@luafunction@count60000
-\countdef\pdfshellescape60001 \pdfshellescape=0
 
 \def\@@!postlua{%
 \let\pdffilesize\tex_filesize:D\let\tex_filesize:D\undefined
