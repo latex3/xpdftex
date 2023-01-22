@@ -113,12 +113,12 @@
 \protected\def\pdffakespace{ \@@!directlua{texio.write_nl("pdffakespace not implemented in xpdftex")}}
 
 \def\@@!postlua{%
-\let\pdffilesize\tex_filesize:D\let\tex_filesize:D\undefined
-\let\pdffiledump\tex_filedump:D\let\tex_filedump:D\undefined
-\let\pdffilemoddate\tex_filemoddate:D\let\tex_filemoddate:D\undefined
-\let\pdfstrcmp\tex_strcmp:D\let\tex_strcmp:D\undefined
-\let\pdfmdfivesum\tex_mdfivesum:D\let\tex_mdfivesum:D\undefined
-\let\pdfelapsedtime\__sys_elapsedtime:\let\__sys_elapsedtime:\undefined
+\let\pdffilesize\tex_filesize:D\let\tex_filesize:D\@undfined
+\let\pdffiledump\tex_filedump:D\let\tex_filedump:D\@undefined
+\let\pdffilemoddate\tex_filemoddate:D\let\tex_filemoddate:D\@undefined
+\let\pdfstrcmp\tex_strcmp:D\let\tex_strcmp:D\@undefined
+\let\pdfmdfivesum\tex_mdfivesum:D\let\tex_mdfivesum:D\@undefined
+\let\pdfelapsedtime\__sys_elapsedtime:\let\__sys_elapsedtime:\@undefined
 \let\__intarray_gset_count:Nw\@undefined
 \let\intarray_count:N\@@!intarray_count:N
 \let\intarray_gzero:N\@@!intarray_gzero:N
@@ -132,6 +132,11 @@
 \let\@@!__intarray_to_clist:Nn\__intarray_to_clist:Nn
 \@@!directlua{require("xpdftex.lua")}\@@!postlua\the\everyjob
 \protected\def\write{\@@!directlua{xpdftex.write_or_execute()}}%
+\let\tex_filesize:D\pdffilesize 
+\let\tex_filedump:D\pdffiledump
+\let\tex_filemoddate:D\pdffilemoddate
+\let\tex_strcmp:D\pdfstrcmp
+\let\tex_mdfivesum:D\pdfmdfivesum
 }
 \@@!directlua{require("xpdftex.lua")}\@@!postlua
 \catcode`\{=12
