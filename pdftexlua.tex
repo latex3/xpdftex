@@ -102,10 +102,10 @@
 \protected\edef\pdfxformattr           {\@@!pdfvariable xformattr}
 \protected\edef\pdfxformresources      {\@@!pdfvariable xformresources}
 \protected\edef\pdfpkmode              {\@@!pdfvariable pkmode}
-\protected\edef\pdfshellescape{\numexpr\@@!directlua{tex.sprint(status.shell_escape)}\relax}
 \let\@@!everyjob\everyjob
 \toksdef\everyjob60000 % pdftex doesn't know about these
 \countdef\e@alloc@luafunction@count60000
+
 
 \def\@@!postlua{%
 \let\pdffilesize\tex_filesize:D\let\tex_filesize:D\undefined
@@ -119,8 +119,12 @@
 \let\intarray_count:N\@undefined
 \let\intarray_gzero:N\@undefined
 \let\__intarray_to_clist:Nn\@undefined
+\protected\edef\pdfshellescape{\numexpr\@@!directlua{tex.sprint(status.shell_escape)}\relax}
 }
-\@@!everyjob{\@@!directlua{require("pdftexlua.lua")}\@@!postlua\the\everyjob}
+\def\@@!tmp{}
+\@@!everyjob{\@@!directlua{require("pdftexlua.lua")}\@@!postlua\the\everyjob
+\protected\def\write{\@@!directlua{pdftexlua.write_or_execute()}}%
+}
 \@@!directlua{require("pdftexlua.lua")}\@@!postlua
 \catcode`\{=12
 \catcode`\{=12

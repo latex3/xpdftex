@@ -1,4 +1,6 @@
 require('expl3.lua')
+pdftexlua = {}
+
 local char    = string.char
 local byte    = string.byte
 local utfchar = utf8.char
@@ -15,3 +17,21 @@ end
 luatexbase.add_to_callback('process_output_buffer', fake_utf_write, "utf8 writing")
 luatexbase.add_to_callback('process_input_buffer', fake_utf_read, "utf8 reading")
 
+
+local function write_or_execute()
+  local s = token.scan_int()
+  if (s==18) then
+     local t = token.create("__sys_shell_now:e")
+     token.put_next(t)
+  else
+     if (s<0) then
+      local t = token.create("m@ne")
+      token.put_next(token.create("tex_write:D"),t)
+     else
+      token.set_char("@@!tmp",s)
+      local t = token.create("@@!tmp")
+      token.put_next(token.create("tex_write:D"),t)
+     end
+  end
+end
+pdftexlua.write_or_execute=write_or_execute
