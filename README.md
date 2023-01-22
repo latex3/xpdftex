@@ -1,4 +1,4 @@
-# pdftexlua
+# xpdftex
 
 ## Experiments in emulating pdftex
 
@@ -45,13 +45,13 @@ to access any luatex functionality).
 ## Usage
 
 ```
-luatex -ini pdflatexlua.ini
+luatex -ini xpdflatex.ini
 ```
 
-should make a `pdflatexlua.fmt` format and
+should make a `xpdflatex.fmt` format and
 
 ```
-luatex \&pdflatexlua test-latin-latin1.tex
+luatex \&xpdflatex test-latin-latin1.tex
 ```
 
 should process an example document.

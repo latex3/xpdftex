@@ -122,10 +122,10 @@
 \protected\edef\pdfshellescape{\numexpr\@@!directlua{tex.sprint(status.shell_escape)}\relax}
 }
 \def\@@!tmp{}
-\@@!everyjob{\@@!directlua{require("pdftexlua.lua")}\@@!postlua\the\everyjob
-\protected\def\write{\@@!directlua{pdftexlua.write_or_execute()}}%
+\@@!everyjob{\@@!directlua{require("xpdftex.lua")}\@@!postlua\the\everyjob
+\protected\def\write{\@@!directlua{xpdftex.write_or_execute()}}%
 }
-\@@!directlua{require("pdftexlua.lua")}\@@!postlua
+\@@!directlua{require("xpdftexx.lua")}\@@!postlua
 \catcode`\{=12
 \catcode`\{=12
 \catcode`\@=12

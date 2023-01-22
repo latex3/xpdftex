@@ -1,5 +1,5 @@
 require('expl3.lua')
-pdftexlua = {}
+xpdftex = {}
 
 local char    = string.char
 local byte    = string.byte
@@ -34,4 +34,4 @@ local function write_or_execute()
      end
   end
 end
-pdftexlua.write_or_execute=write_or_execute
+xpdftex.write_or_execute=write_or_execute
