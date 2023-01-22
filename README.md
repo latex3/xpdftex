@@ -28,12 +28,15 @@ to access any luatex functionality).
 
  - The Lua definitions of the pdftex primitives are used from expl3.lua (which is loaded)
  
+ -  shell escape from shelles
+
+ -  tex-xet so no `\beginL` etc  (Code by Marcel in xet-tex branch)
+
+
+## Partially implemented
 
 ## NOT DONE
 
- -  shell escape (can steal code from shellesc)
- -  tex-xet so no `\beginL` etc  (might be doable in lua node callback,
-    or fake with luatex direction primitives)
  -  logging (probably just in l3build normalisation)
  -  `\eTeXgluestretchorder`
  -  pdftex space primitives `\pdfadjustinterwordglue`,
