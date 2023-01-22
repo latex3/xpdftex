@@ -41,7 +41,7 @@ to access any luatex functionality).
  -  `\eTeXgluestretchorder`
  -  pdftex space primitives `\pdfadjustinterwordglue`,
  -  `\pdfmatch`
- -  pdftexbanner
+
 
 
 

@@ -17,7 +17,7 @@
 'lastsavedimageresourceindex','lastsavedimageresourcepages','useimageresource','outputmode',
 'ifprimitive','ifabsnum','ifabsdim'})}
 \@@!directlua{tex.enableprimitives('',tex.extraprimitives('etex'))}
-\@@!directlua{tex.enableprimitives('@@!',{'pdffeedback','pdfextension','pdfvariable'})}
+\@@!directlua{tex.enableprimitives('@@!',{'pdffeedback','pdfextension','pdfvariable','luatexbanner'})}
 
 
 
@@ -106,6 +106,7 @@
 \toksdef\everyjob60000 % pdftex doesn't know about these
 \countdef\e@alloc@luafunction@count60000
 
+\edef\pdftexbanner{xpdftex: \@@!luatexbanner}
 
 \def\@@!postlua{%
 \let\pdffilesize\tex_filesize:D\let\tex_filesize:D\undefined
