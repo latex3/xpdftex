@@ -108,6 +108,10 @@
 
 \edef\pdftexbanner{xpdftex: \@@!luatexbanner}
 
+\protected\def\pdfinterwordspaceon{\@@!directlua{texio.write_nl("pdfinterwordspaceon not implemented in xpdftex")}}
+\protected\def\pdfinterwordspaceoff{\@@!directlua{texio.write_nl("pdfinterwordspaceoff not implemented in xpdftex")}}
+\protected\def\pdffakespace{ \@@!directlua{texio.write_nl("pdffakespace not implemented in xpdftex")}}
+
 \def\@@!postlua{%
 \let\pdffilesize\tex_filesize:D\let\tex_filesize:D\undefined
 \let\pdffiledump\tex_filedump:D\let\tex_filedump:D\undefined
