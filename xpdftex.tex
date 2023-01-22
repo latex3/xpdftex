@@ -15,7 +15,7 @@
 \@@!directlua{tex.enableprimitives('',{'expanded','ignoreligaturesinfont',
 'expandglyphsinfont','lastsavedboxresourceindex','useboxresource','saveimageresource',
 'lastsavedimageresourceindex','lastsavedimageresourcepages','useimageresource','outputmode',
-'ifprimitive','ifabsnum','ifabsdim'})}
+'ifprimitive','ifabsnum','ifabsdim','lpcode','rpcode'})}
 \@@!directlua{tex.enableprimitives('',tex.extraprimitives('etex'))}
 \@@!directlua{tex.enableprimitives('@@!',{'pdffeedback','pdfextension','pdfvariable','luatexbanner'})}
 
@@ -139,6 +139,32 @@
 \let\tex_mdfivesum:D\pdfmdfivesum
 }
 \@@!directlua{require("xpdftex.lua")}\@@!postlua
+
+
+% allow microtype to find luatex
+\everyjob\expandafter{\the\everyjob
+\AddToHook{file/microtype.sty/before}[xpdftex]{%
+\let\pdftexversion\@undefined
+\let\directlua\@@!directlua
+\let\protrudechars\pdfprotrudechars
+\let\adjustspacing\pdfadjustspacing
+\let\expandglyphsinfont\pdffontexpand
+\def\luatexversion{115}%
+\countdef\outputmode10000 \outputmode=1
+}%
+\AddToHook{file/microtype.sty/after}[xpdftex]{%
+\AtBeginDocument{\def\pdftexversion{140}%
+\let\directlua\@undefined
+\let\luatexversion\@undefined
+\let\pdfoutput\@undefined
+\let\protrudechars\@undefined
+\let\adjustspacing\@undefined
+\let\expandglyphsinfont\@undefined
+}}%
+}
+
+
+
 \catcode`\{=12
 \catcode`\{=12
 \catcode`\@=12
