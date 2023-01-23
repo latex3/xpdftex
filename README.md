@@ -69,6 +69,9 @@ should process an example document.
    * on windows make copies from the small (2kb) `luahbtex.exe` 
     (or `luatex.exe` if you want to use that engine) in 
      `...\texlive\2022\bin\win32` and call them `xpdflatex.exe` and `xpdflatex-dev.exe`.
+   * on other systems you should be able to make a symbolic link of `luahbtex` (or `luatex`)
+     so in `.../texlive/2022/bin/*` execute `ln -s luahbtex xpdflatex` and 
+	 `ln -s luahbtex xpdflatex-dev` or equvalent commands  for your operating system.
 
 * Add entries to a `fmtutil.cnf` in `texmf-local/web2c` (create it if
 needed):
