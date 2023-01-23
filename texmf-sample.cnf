@@ -1,0 +1,6 @@
+# sample paths for xpdflatex, to be added to a local texmf.cnf
+
+TEXINPUTS.xpdflatex      = $TEXMFDOTDIR;$TEXMF/tex/{latex,generic,}//
+TEXINPUTS.xpdflatex-dev  = $TEXMFDOTDIR;$TEXMF/tex/{latex-dev,latex,generic,}//
+LUAINPUTS.xpdflatex      = $TEXMFDOTDIR;$TEXMF/scripts/{lualatex,$engine,}/{lua,}//;$TEXMF/tex/{lualatex,latex,luatex,generic,}//
+LUAINPUTS.xpdflatex-dev  = $TEXMFDOTDIR;$TEXMF/scripts/{lualatex,$engine,}/{lua,}//;$TEXMF/tex/{latex-dev,lualatex,latex,luatex,generic,}//

@@ -1,0 +1,2 @@
+xpdflatex luahbtex language.dat,language.dat.lua xpdflatex.ini
+xpdflatex-dev luahbtex language.dat,language.dat.lua xpdflatex.ini

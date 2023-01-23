@@ -45,7 +45,7 @@ to access any luatex functionality).
 
 
 
-## Usage
+## Usage (without installing)
 
 ```
 luatex -ini xpdflatex.ini
@@ -58,5 +58,27 @@ luatex \&xpdflatex test-latin-latin1.tex
 ```
 
 should process an example document.
+
+
+## Integration into TeXLive
+
+* Install the files with `l3build install`
+
+* Add entries to a `fmtutil.cnf` in `texmf-local/web2c` (create it if
+needed):
+
+  A sample `fmtutil.cnf` is included in the repository
+
+
+The `-dev` version is optional, and instead of the engine `luahbtex`
+one could use `luatex` (currently unclear which is better).
+
+* Add search paths to a local `texmf.cnf`, e.g. the one in
+`texlive/2022`:
+
+ Sample lines are in `texmf-sample.cnf`
+
+
+
 
 
