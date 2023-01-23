@@ -76,16 +76,16 @@ one could use `luatex` (currently unclear which is better).
 * Add search paths to a local `texmf.cnf`, e.g. the one in
 `texlive/2022`:
 
- Sample lines are in `texmf-sample.cnf`
+  Sample lines are in `texmf-sample.cnf`
 
-* create the formats with
+* Create the formats with
 
 ~~~~
 fmtutil-sys --byfmt xpdflatex
 fmtutil-sys --byfmt xpdflatex-dev
 ~~~~
 
-The commands `xpdflatex` and `xpdflatex-dev` should then be avalable.
+   The commands `xpdflatex` and `xpdflatex-dev` should then be available.
 
 
 
