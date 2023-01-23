@@ -78,6 +78,14 @@ one could use `luatex` (currently unclear which is better).
 
  Sample lines are in `texmf-sample.cnf`
 
+* create the formats with
+
+~~~~
+fmtutil-sys --byfmt xpdflatex
+fmtutil-sys --byfmt xpdflatex-dev
+~~~~
+
+The commands `xpdflatex` and `xpdflatex-dev` should then be avalable.
 
 
 
