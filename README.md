@@ -30,10 +30,11 @@ to access any luatex functionality).
  
  -  shell escape from the shellescape package.
 
- -  tex--xet so no `\beginL` etc  (Code by Marcel in xet--tex branch)
 
 
 ## Partially implemented
+
+ -  tex--xet so no `\beginL` etc  (Code by Marcel in xet--tex branch)
 
 ## NOT DONE
 
