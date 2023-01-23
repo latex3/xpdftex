@@ -1,3 +1,9 @@
+-- xpdftex (pdftex emulation in luatex)
+-- Copyright 2022-2023 LaTeX Project
+-- It may be distributed and/or modified under the
+-- conditions of the LaTeX Project Public License, either version 1.3c
+-- of this license or (at your option) any later version.
+
 require('expl3.lua')
 xpdftex = {}
 
