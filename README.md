@@ -28,9 +28,9 @@ to access any luatex functionality).
 
  - The Lua definitions of the pdftex primitives are used from expl3.lua (which is loaded)
  
- -  shell escape from shelles
+ -  shell escape from the shellescape package.
 
- -  tex-xet so no `\beginL` etc  (Code by Marcel in xet-tex branch)
+ -  tex--xet so no `\beginL` etc  (Code by Marcel in xet--tex branch)
 
 
 ## Partially implemented
