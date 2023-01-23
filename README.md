@@ -1,4 +1,4 @@
-# pdftexlua
+# xpdftex
 
 ## Experiments in emulating pdftex
 
@@ -11,7 +11,7 @@ hyphenation mechanism, and some more obscure pdftex extensions are
 harder to emulate).
 
 Test documents and other documents explicitly testing definitions
-with `\meaning` of `\ifprimitive` can detect the emulation, but most
+with `\meaning` or `\ifprimitive` can detect the emulation, but most
 "normal" documents should (eventually) work without error.
 
 luatex is mostly hidden so that packages such as graphics/hyperref etc
@@ -28,30 +28,33 @@ to access any luatex functionality).
 
  - The Lua definitions of the pdftex primitives are used from expl3.lua (which is loaded)
  
+ -  shell escape from shelles
+
+ -  tex-xet so no `\beginL` etc  (Code by Marcel in xet-tex branch)
+
+
+## Partially implemented
 
 ## NOT DONE
 
- -  shell escape (can steal code from shellesc)
- -  tex-xet so no `\beginL` etc  (might be doable in lua node callback,
-    or fake with luatex direction primitives)
  -  logging (probably just in l3build normalisation)
  -  `\eTeXgluestretchorder`
  -  pdftex space primitives `\pdfadjustinterwordglue`,
  -  `\pdfmatch`
- -  pdftexbanner
+
 
 
 
 ## Usage
 
 ```
-luatex -ini pdflatexlua.ini
+luatex -ini xpdflatex.ini
 ```
 
-should make a `pdflatexlua.fmt` format and
+should make a `xpdflatex.fmt` format and
 
 ```
-luatex \&pdflatexlua test-latin-latin1.tex
+luatex \&xpdflatex test-latin-latin1.tex
 ```
 
 should process an example document.

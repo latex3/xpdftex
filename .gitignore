@@ -1,0 +1,11 @@
+*.fmt
+*.log
+*.aux
+*~
+*.pdf
+*.dvi
+examples/_minted*
+examples/*.lua
+examples/*.eps
+examples/*.txt
+build

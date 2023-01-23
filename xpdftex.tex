@@ -10,14 +10,14 @@
 
 \@@!directlua{tex.enableprimitives('pdf',{'tracingfonts','pagewidth','pageheight',
 'adjustspacing','protrudechars','copyfont','savepos','lastxpos','lastypos',
-'draftmode','pxdimen','insertht','normaldeviate','setrandomseed','primitive'
+'draftmode','pxdimen','insertht','normaldeviate','uniformdeviate', 'setrandomseed','primitive'
 })}
 \@@!directlua{tex.enableprimitives('',{'expanded','ignoreligaturesinfont',
 'expandglyphsinfont','lastsavedboxresourceindex','useboxresource','saveimageresource',
 'lastsavedimageresourceindex','lastsavedimageresourcepages','useimageresource','outputmode',
-'ifprimitive','ifabsnum','ifabsdim'})}
+'ifprimitive','ifabsnum','ifabsdim','lpcode','rpcode'})}
 \@@!directlua{tex.enableprimitives('',tex.extraprimitives('etex'))}
-\@@!directlua{tex.enableprimitives('@@!',{'pdffeedback','pdfextension','pdfvariable'})}
+\@@!directlua{tex.enableprimitives('@@!',{'pdffeedback','pdfextension','pdfvariable','luatexbanner'})}
 
 
 
@@ -102,28 +102,70 @@
 \protected\edef\pdfxformattr           {\@@!pdfvariable xformattr}
 \protected\edef\pdfxformresources      {\@@!pdfvariable xformresources}
 \protected\edef\pdfpkmode              {\@@!pdfvariable pkmode}
-
 \let\@@!everyjob\everyjob
 \toksdef\everyjob60000 % pdftex doesn't know about these
 \countdef\e@alloc@luafunction@count60000
-\countdef\pdfshellescape60001 \pdfshellescape=0
 \countdef\TeXXeTstate60002 \TeXXeTstate=0
 
+\edef\pdftexbanner{xpdftex: \@@!luatexbanner}
+
+\protected\def\pdfinterwordspaceon{\@@!directlua{texio.write_nl("pdfinterwordspaceon not implemented in xpdftex")}}
+\protected\def\pdfinterwordspaceoff{\@@!directlua{texio.write_nl("pdfinterwordspaceoff not implemented in xpdftex")}}
+\protected\def\pdffakespace{ \@@!directlua{texio.write_nl("pdffakespace not implemented in xpdftex")}}
+
 \def\@@!postlua{%
-\let\pdffilesize\tex_filesize:D\let\tex_filesize:D\undefined
-\let\pdffiledump\tex_filedump:D\let\tex_filedump:D\undefined
-\let\pdffilemoddate\tex_filemoddate:D\let\tex_filemoddate:D\undefined
-\let\pdfstrcmp\tex_strcmp:D\let\tex_strcmp:D\undefined
-\let\pdfmdfivesum\tex_mdfivesum:D\let\tex_mdfivesum:D\undefined
-\let\pdfelapsedtime\__sys_elapsedtime:\let\__sys_elapsedtime:\undefined
+\let\pdffilesize\tex_filesize:D\let\tex_filesize:D\@undfined
+\let\pdffiledump\tex_filedump:D\let\tex_filedump:D\@undefined
+\let\pdffilemoddate\tex_filemoddate:D\let\tex_filemoddate:D\@undefined
+\let\pdfstrcmp\tex_strcmp:D\let\tex_strcmp:D\@undefined
+\let\pdfmdfivesum\tex_mdfivesum:D\let\tex_mdfivesum:D\@undefined
+\let\pdfelapsedtime\__sys_elapsedtime:\let\__sys_elapsedtime:\@undefined
 \let\__intarray_gset_count:Nw\@undefined
-\let\intarray_count:N\@undefined
-\let\intarray_count:N\@undefined
-\let\intarray_gzero:N\@undefined
-\let\__intarray_to_clist:Nn\@undefined
+\let\intarray_count:N\@@!intarray_count:N
+\let\intarray_gzero:N\@@!intarray_gzero:N
+\let\__intarray_to_clist:Nn\@@!__intarray_to_clist:Nn
+\protected\edef\pdfshellescape{\numexpr\@@!directlua{tex.sprint(status.shell_escape)}\relax}
 }
-\@@!everyjob{\@@!directlua{require("pdftexlua.lua")}\@@!postlua\the\everyjob}
-\@@!directlua{require("pdftexlua.lua")}\@@!postlua
+\def\@@!tmp{}
+\@@!everyjob{%
+\let\@@!intarray_count:N\intarray_count:N
+\let\@@!intarray_gzero:N\intarray_gzero:N
+\let\@@!__intarray_to_clist:Nn\__intarray_to_clist:Nn
+\@@!directlua{require("xpdftex.lua")}\@@!postlua\the\everyjob
+\protected\def\write{\@@!directlua{xpdftex.write_or_execute()}}%
+\let\tex_filesize:D\pdffilesize 
+\let\tex_filedump:D\pdffiledump
+\let\tex_filemoddate:D\pdffilemoddate
+\let\tex_strcmp:D\pdfstrcmp
+\let\tex_mdfivesum:D\pdfmdfivesum
+}
+\@@!directlua{require("xpdftex.lua")}\@@!postlua
+
+
+% allow microtype to find luatex
+\everyjob\expandafter{\the\everyjob
+\AddToHook{file/microtype.sty/before}[xpdftex]{%
+\let\pdftexversion\@undefined
+\let\directlua\@@!directlua
+\let\protrudechars\pdfprotrudechars
+\let\adjustspacing\pdfadjustspacing
+\let\expandglyphsinfont\pdffontexpand
+\def\luatexversion{115}%
+\countdef\outputmode10000 \outputmode=1
+}%
+\AddToHook{file/microtype.sty/after}[xpdftex]{%
+\AtBeginDocument{\def\pdftexversion{140}%
+\let\directlua\@undefined
+\let\luatexversion\@undefined
+\let\pdfoutput\@undefined
+\let\protrudechars\@undefined
+\let\adjustspacing\@undefined
+\let\expandglyphsinfont\@undefined
+}}%
+}
+
+
+
 \catcode`\{=12
 \catcode`\{=12
 \catcode`\@=12

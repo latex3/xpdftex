@@ -1,0 +1,13 @@
+\documentclass{article}
+
+\typeout{\pdfshellescape=\the\pdfshellescape}
+
+\begin{document}
+
+\immediate\write20{ABC}
+
+\immediate\write18{echo abc > \jobname.txt}
+
+\input{\jobname.txt}
+
+\end{document}
